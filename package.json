@@ -10,7 +10,9 @@
     "test": "node --test tests/*.test.js",
     "user:create": "node server/create-user.js",
     "demo": "node scripts/start.mjs --demo",
-    "test:browser": "node tests/browser.mjs"
+    "test:browser": "node tests/browser.mjs",
+    "build:xampp": "npm run build && node scripts/build-xampp.mjs",
+    "test:xampp": "node tests/xampp.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4",

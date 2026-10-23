@@ -1,0 +1,15 @@
+import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+import { domains } from '../server/domains.js';
+import { seed } from '../server/seed.js';
+const root=fileURLToPath(new URL('../',import.meta.url));
+process.chdir(root);
+const out=resolve('build-xampp/sigeia');
+rmSync(out,{recursive:true,force:true});mkdirSync(out,{recursive:true});
+cpSync('xampp',out,{recursive:true});
+cpSync('dist/assets',out+'/assets',{recursive:true});
+writeFileSync(out+'/app.html',readFileSync('dist/index.html','utf8'));
+for(const [name,value] of Object.entries({domains,seed}))writeFileSync(out+`/private/${name}.php`, `<?php\nif (!defined('SIGEIA_APP')) { http_response_code(403); exit; }\nreturn json_decode(<<<'SIGEIA_JSON'\n${JSON.stringify(value,null,2)}\nSIGEIA_JSON, true, 512, JSON_THROW_ON_ERROR);\n`);
+cpSync('LEEME-XAMPP.md',out+'/LEEME-XAMPP.md');
+console.log('Carpeta XAMPP lista: build-xampp/sigeia (copiar dentro de htdocs).');

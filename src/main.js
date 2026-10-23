@@ -15,7 +15,8 @@ function toast(message, error = false) {
   const el = document.createElement('div'); el.className = 'toast' + (error ? ' error' : ''); el.textContent = message; el.setAttribute('role', 'status'); document.body.append(el); setTimeout(() => el.remove(), 4500);
 }
 async function api(path, options = {}) {
-  const response = await fetch('/api' + path, { ...options, headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': session?.csrf || '', ...options.headers } });
+  const phpEndpoint = document.querySelector('meta[name="sigeia-api"]')?.content;
+  const response = await fetch(phpEndpoint ? phpEndpoint + encodeURIComponent(path) : '/api' + path, { ...options, headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': session?.csrf || '', ...options.headers } });
   const result = await response.json();
   if (!response.ok) {
     if (response.status === 401 && session) { session = null; clearInterval(refreshTimer); loginView(); }

@@ -1,5 +1,7 @@
 # SIGEIA Platform
 
+**¿Usas XAMPP? Descarga [SIGEIA-XAMPP.zip](distribution/SIGEIA-XAMPP.zip) y sigue [LEEME-XAMPP.md](LEEME-XAMPP.md). Esa distribución funciona con Apache + PHP, sin Node.js ni MySQL. No copies este repositorio completo a `htdocs`.**
+
 **Para ejecutar la carpeta descargada en tu localhost, empieza por [LEEME-PRIMERO.md](LEEME-PRIMERO.md). Incluye arranque directo sin instalar dependencias, con la interfaz ya compilada.**
 
 Primera implementación funcional basada en **SIGEIA PLATFORM 1.0**. Interfaz en español, framework declarativo independiente del negocio y servidor con persistencia local. Alcance: piloto de una sola instancia; no es una plataforma empresarial terminada ni un despliegue público.

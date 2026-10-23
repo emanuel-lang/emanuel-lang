@@ -46,3 +46,11 @@ El dominio analítico queda preparado conceptualmente para una integración post
 ### ADR-007 · Separación demostración/piloto
 
 Demostración explícita sin autenticación con datos sintéticos; piloto por defecto vacío y autenticado. Directorios distintos. Pruebas ejecutadas con almacenamiento temporal para no modificar registros del usuario. Nunca reutilizar una demostración como un piloto con datos reales.
+
+### ADR-008 · Distribución PHP nativa para XAMPP
+
+Se añade un adaptador HTTP/PHP en `xampp/` para ejecutar SIGEIA con Apache y PHP 8.1+, sin proceso Node.js ni MySQL. La interfaz usa rutas relativas y un endpoint inyectado mediante una etiqueta meta, de modo que funciona en subcarpetas sin `mod_rewrite`. Los catálogos declarativos y los datos sintéticos se generan desde las mismas definiciones JavaScript; el núcleo PHP recibe definiciones y validaciones de negocio inyectadas.
+
+Almacenamiento PHP por instalación fuera de DocumentRoot, reemplazo por archivo y bloqueo estable con `flock` para no perder escrituras concurrentes de procesos Apache. Las cuentas y sesiones PHP son independientes de Node.js; usan `password_hash`/`password_verify` y no importan sus hashes. El asistente inicial se limita a localhost, usa CSRF y deja de crear cuentas al existir la primera. Demostración restringida a localhost; piloto vacío independiente. No se afirma equivalencia operativa entre instalaciones ni se habilita lectura por territorio.
+
+Validación sobre Apache/PHP reales en Linux y navegador Chromium; no se ha ejecutado el instalador de XAMPP para Windows en este entorno. La entrega incluye una carpeta `sigeia` compilada dentro de un ZIP. Mantener PHP actualizado y revisar las reglas y los controles de operación antes de usar datos reales.

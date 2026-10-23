@@ -1,5 +1,7 @@
 # SIGEIA · Inicio en tu localhost
 
+**Si utilizas XAMPP:** descarga `distribution/SIGEIA-XAMPP.zip` y sigue `LEEME-XAMPP.md`. Las instrucciones siguientes corresponden a la distribución Node.js original.
+
 ## Lo necesario
 
 Instala **Node.js 22 o superior** desde https://nodejs.org (versión LTS). No necesitas XAMPP, Apache, PHP, MySQL ni una cuenta en la nube. Descomprime **toda** la carpeta antes de ejecutar archivos. No abras `index.html` con doble clic: la aplicación necesita su servidor.
